@@ -111,7 +111,7 @@ const SolCheckout = (props:userData) =>{
         const bizOwnerAddress = "EWfVcG1SHjrHNiYaDdhpNepkS8xhZJ2Uwwd9h56ZpnLd";
         const receiver = new PublicKey(bizOwnerAddress);
         const signature = await sendMoney(sender,receiver,solTotal);
-        console.log(signature);
+        console.log(`https://solscan.io/tx/${signature}?cluster=devnet`);
     }
 
     //UseEffects

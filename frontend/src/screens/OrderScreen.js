@@ -16,6 +16,7 @@ import {
   ORDER_DELIVER_RESET,
 } from '../constants/orderConstants'
 import SolCheckout from './solCheckout.tsx'
+import Swap from '../components/Swap'
 
 const OrderScreen = ({ match, history }) => {
   const orderId = match.params.id
@@ -220,6 +221,7 @@ const OrderScreen = ({ match, history }) => {
                 )}
             </ListGroup>
           </Card>
+          <Swap/>
         </Col>
       </Row>
     </>

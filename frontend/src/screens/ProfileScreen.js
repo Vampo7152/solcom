@@ -7,6 +7,7 @@ import Loader from '../components/Loader'
 import { getUserDetails, updateUserProfile } from '../actions/userActions'
 import { listMyOrders } from '../actions/orderActions'
 import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants'
+import { logout } from '../actions/userActions'
 
 const ProfileScreen = ({ location, history }) => {
   const [name, setName] = useState('')
@@ -28,6 +29,10 @@ const ProfileScreen = ({ location, history }) => {
 
   const orderListMy = useSelector((state) => state.orderListMy)
   const { loading: loadingOrders, error: errorOrders, orders } = orderListMy
+  
+  const logoutHandler = () => {
+    dispatch(logout())
+  }
 
   useEffect(() => {
     if (!userInfo) {
@@ -106,11 +111,16 @@ const ProfileScreen = ({ location, history }) => {
               ></Form.Control>
             </Form.Group>
 
-            <Button type='submit' variant='primary'>
+            <Button type='submit' variant='primary' className="updateButton">
               Update
             </Button>
+
+            <Button onClick={logoutHandler} variant='primary' className="updateButton">
+          Logout
+        </Button>
           </Form>
         )}
+       
       </Col>
       <Col md={9}>
         <h2>My Orders</h2>
