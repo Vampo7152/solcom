@@ -1,0 +1,1 @@
+mongodb+srv://Vamp:bZE5G2jkkButTx7b@cluster0.itrw0.mongodb.net/Cluster0?retryWrites=true&w=majority
