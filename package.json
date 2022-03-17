@@ -1,7 +1,7 @@
 {
-  "name": "proshop",
+  "name": "solcom",
   "version": "1.0.0",
-  "description": "MERN shopping cart app",
+  "description": "MERN",
   "main": "server.js",
   "type": "module",
   "scripts": {
@@ -13,8 +13,6 @@
     "data:destroy": "node backend/seeder -d",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
   },
-  "author": "Brad Traversy",
-  "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "colors": "^1.4.0",

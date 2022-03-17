@@ -285,10 +285,7 @@ const verifyNFT = async (nftMetaData) =>{
                               <Button
                               onClick={connectWallet}
                               type='button'
-                              className='btn-block btn-lg main-button'
-                              disabled={
-                                !buttonStatus
-                              }>
+                              className='btn-block btn-lg main-button'>
                               Connect Wallet
                             </Button>
                         )}
@@ -299,9 +296,7 @@ const verifyNFT = async (nftMetaData) =>{
                             onClick={addToCartHandler}
                             type='button'
                             className='btn-block btn-lg main-button'
-                            disabled={
-                              !buttonStatus
-                            }>
+                            >
                             Add To Cart
                           </Button>
                         )}
@@ -314,9 +309,7 @@ const verifyNFT = async (nftMetaData) =>{
                           onClick={addToCartHandler}
                           type='button'
                           className='btn-block btn-lg main-button'
-                          disabled={
-                            !buttonStatus
-                        }>
+                          >
                           Add To Cart
                           </Button>
                           </div>
