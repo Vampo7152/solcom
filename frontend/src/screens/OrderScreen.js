@@ -17,6 +17,7 @@ import {
 } from '../constants/orderConstants'
 import SolCheckout from './solCheckout.tsx'
 import Swap from '../components/Swap'
+// import SolPay from './solPay.tsx'  { QR Code Component imported here}
 
 const OrderScreen = ({ match, history }) => {
   const orderId = match.params.id
@@ -33,10 +34,9 @@ const OrderScreen = ({ match, history }) => {
 
   const orderDeliver = useSelector((state) => state.orderDeliver)
   const { loading: loadingDeliver, success: successDeliver } = orderDeliver
-
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
-
+  const [showSolanaPay, setShowSolanaPay] = useState(false)
   if (!loading) {
     //   Calculate prices
     const addDecimals = (num) => {
@@ -202,6 +202,15 @@ const OrderScreen = ({ match, history }) => {
                   <SolCheckout 
 												amount = {order.totalPrice}
 												/>
+                     { /* <Button onClick={() => {
+                          setShowSolanaPay(true)
+                        }}>Qr Code payment</Button>
+                        <SolPay
+                        open={showSolanaPay}
+                        closeModal={() => setShowSolanaPay(false)}
+                        orderId={order._id}
+												cost = {order.totalPrice}
+                      /> */}
                 </ListGroup.Item>
               )}
               {loadingDeliver && <Loader />}

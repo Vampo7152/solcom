@@ -1,10 +1,11 @@
 import { Connection, Transaction,SystemProgram } from "@solana/web3.js";
 import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
-import {sendMoney} from './wallet'
 import {PublicKey} from '@solana/web3.js';
 import axios from 'axios';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { getWallet } from "./exportWallet";
 
 interface userData{
     amount:number;
@@ -35,13 +36,10 @@ const SolCheckout = (props:userData) =>{
 	  }
 	
 	const computeSolPrice = () => {
-	
 			const amountTemp = Number(amount / solPrice).toFixed(2);
             const realamt = parseFloat(amountTemp)
             console.log(realamt);
 			setSolTotal(realamt);
-
-
 	  }
 
 
@@ -100,10 +98,58 @@ const SolCheckout = (props:userData) =>{
 
 
     //API
+       const paySolana  = async () =>{
+        const wallet = getWallet()
+        const sender = connectWallet()
+        const environ = "devnet"
+        const network = `https://api.${environ}.solana.com`
+        const bizOwnerAddress = "EWfVcG1SHjrHNiYaDdhpNepkS8xhZJ2Uwwd9h56ZpnLd";
+        console.log(amount);
+    
+        const connection = new Connection(network)
+        const transaction = new Transaction()
+        .add(
+          SystemProgram.transfer({
+            fromPubkey: new PublicKey(walletAddress),
+            toPubkey:new PublicKey(bizOwnerAddress),
+            lamports: solTotal * 1000000000
+          })
+        );
+    
+        const { blockhash } = await connection.getRecentBlockhash()
+        transaction.recentBlockhash = blockhash
+        transaction.feePayer = new PublicKey(walletAddress)
+        
+       if(transaction){
+         try{
+    
+          let signed = await wallet.signTransaction(transaction)
+          console.log('Got signature, submitting transaction');
+      
+          let signature = await connection.sendRawTransaction(signed.serialize());
+            console.log('Submitted transaction ' + signature + ', awaiting confirmation');
+      
+            await connection.confirmTransaction(signature);
+            console.log('Transaction ' + signature + ' confirmed');
+    
+            console.log(`https://solscan.io/tx/${signature}?cluster=devnet`);
+    
+         } catch(e){
+          console.warn(e);
+          console.log((e));
+          toast.error(
+            "Transaction not completed! 😢"
+          );
+         }
+       }return {
+        error: "No transaction found"
+     }
+    }
 
 
 
-    const paySolana = async() =>{
+  /* const paySolana = async() =>{
+        toast("Wow so easy!");
         const sender = new PublicKey(walletAddress);
         const orignalBal:number = +currentWalletBalance;
         console.log("IN PAY SOLANA: ", amount );
@@ -113,7 +159,7 @@ const SolCheckout = (props:userData) =>{
         const signature = await sendMoney(sender,receiver,solTotal);
         console.log(`https://solscan.io/tx/${signature}?cluster=devnet`);
     }
-
+*/
     //UseEffects
 
     useEffect(()=>{

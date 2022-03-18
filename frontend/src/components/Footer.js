@@ -3,10 +3,10 @@ import { Container, Row, Col } from 'react-bootstrap'
 
 const Footer = () => {
   return (
-    <footer>
-      <Container>
+    <footer className="footer-main">
+      <Container >
         <Row>
-          <Col className='text-center py-3'>Earn in Crypto | Spend in Crypto </Col>
+          <Col className='text-center py-3'>Earn in Solana 🤝 Spend in Solana </Col>
         </Row>
       </Container>
     </footer>
@@ -14,3 +14,4 @@ const Footer = () => {
 }
 
 export default Footer
+ 

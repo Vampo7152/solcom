@@ -13,6 +13,7 @@ import {
 import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants'
 import { Connection, PublicKey, clusterApiUrl} from '@solana/web3.js';
 import { Metadata } from "@metaplex-foundation/mpl-token-metadata";
+import toast, { Toaster } from 'react-hot-toast';
 
 const ProductScreen = ({ history, match }) => {
   const [qty, setQty] = useState(1)
@@ -149,6 +150,7 @@ const verifyNFT = async (nftMetaData) =>{
   }, [dispatch, match, successProductReview])
 
   const addToCartHandler = () => {
+    toast.success('Added to cart!');
     history.push(`/cart/${match.params.id}?qty=${qty}`)
   }
 
